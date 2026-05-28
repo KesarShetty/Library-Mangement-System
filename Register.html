@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Account</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background-image: url('https://www.biblionix.com/wp-content/uploads/2023/11/Library-ManagementSystem.jpg');
+        }
+
+        .box{
+            background:hwb(199 62% 13%);
+            padding:30px;
+            width:420px;
+            border-radius:10px;
+            text-align:center;
+            box-shadow:0 0 10px rgba(0,0,0,0.2);
+        }
+
+        h2{
+            margin-bottom:10px;
+            color:#333;
+        }
+
+        input{
+            width:100%;
+            padding:10px;
+            margin-top:10px;
+            border-radius:5px;
+            border:1px solid #ccc;
+        }
+
+        button{
+            width:100%;
+            padding:10px;
+            margin-top:15px;
+            border:none;
+            border-radius:5px;
+            background:#43cea2;
+            color:white;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#36b890;
+        }
+
+        #breakdown{
+            margin-top:15px;
+            font-size:14px;
+            text-align:left;
+        }
+
+        .grade{
+            font-size:18px;
+            font-weight:bold;
+            margin-top:10px;
+            color:green;
+        }
+
+        #msg{
+            margin-top:10px;
+            font-weight:bold;
+        }
+
+        a{
+            color:#185a9d;
+            text-decoration:none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Create Account</h2>
+
+    <input type="text" id="Email-id" placeholder="Email-id">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="register()">Register</button>
+
+    <div id="breakdown"></div>
+    <div class="grade" id="finalGrade"></div>
+    <p id="msg"></p>
+
+    <p><a href="C:\Users\Google\Documents\Library Mangement System\index.html">Back to Login</a></p>
+</div>
+
+<script>
+function register(){
+    const username=document.getElementById("Email-id").value;
+    const password=document.getElementById("password").value;
+    const msg=document.getElementById("msg");
+    const breakdown=document.getElementById("breakdown");
+    const finalGrade=document.getElementById("finalGrade");
+
+    if(!username || !password){
+        msg.style.color="red";
+        msg.innerText="All fields required";
+        return;
+    }
+
+    const users=JSON.parse(localStorage.getItem("users"))||[];
+    const exists=users.find(u=>u.username===username);
+
+    if(exists){
+        msg.style.color="red";
+        msg.innerText="User already exists";
+        return;
+    }
+
+    users.push({username,password});
+    localStorage.setItem("users",JSON.stringify(users));
+
+    msg.innerText="";
+    breakdown.innerHTML="";
+    finalGrade.innerText="";
+
+    const items=["Validation","Saving Data","Security"];
+    let index=0;
+
+    function animateItem(){
+        if(index>=items.length){
+            finalGrade.innerText="Account Created Successfully ✅";
+            msg.style.color="green";
+            msg.innerText="Redirecting to login...";
+
+            setTimeout(()=>{
+                window.location.href="index.html";
+            },1500);
+            return;
+        }
+
+        let percent=0;
+        const line=document.createElement("div");
+        breakdown.appendChild(line);
+
+        const interval=setInterval(()=>{
+            percent++;
+            line.innerText=items[index]+": "+percent+"%";
+
+            if(percent>=100){
+                clearInterval(interval);
+                index++;
+                animateItem();
+            }
+        },10);
+    }
+
+    animateItem();
+}
+</script>
+
+</body>
+</html>

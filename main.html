@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<button class="dark-btn" onclick="toggleDarkMode()">
+    🌙 Dark Mode
+</button>
+
+<title>Smart Library Management System</title>
+
+<style>
+  .dark-btn {
+
+    position: absolute;
+
+    top: 20px;
+
+    right: 20px;
+
+    width: auto;
+
+    padding: 10px 15px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    background: #0f2027;
+    color: white;
+    background-image: url('data:image/jpeg;base64,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');
+}
+
+
+
+/* Container */
+
+.container {
+
+    width: 750px;
+
+    margin: 50px auto;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    box-shadow: 0 0 40px rgba(0,255,255,0.3);
+}
+
+/* Heading */
+
+h1 {
+    text-align: center;
+}
+
+/* Dashboard */
+
+.dashboard {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+.card {
+
+    flex: 1;
+
+    padding: 20px;
+
+    text-align: center;
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.1);
+
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.card h2 {
+
+    font-size: 35px;
+
+    margin: 0;
+}
+
+/* Inputs */
+
+input {
+
+    width: 100%;
+
+    padding: 12px;
+
+    margin-top: 10px;
+
+    border-radius: 10px;
+
+    border: none;
+
+    outline: none;
+
+    background: rgba(255,255,255,0.15);
+
+    color: white;
+
+    font-size: 16px;
+
+    box-sizing: border-box;
+}
+
+input::placeholder {
+
+    color: rgba(255,255,255,0.7);
+}
+
+/* Buttons */
+
+button {
+
+    width: 200px;
+
+    padding: 12px;
+
+    margin-top: 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    color: white;
+
+    background: linear-gradient(45deg,#00f5ff,#ff00ff);
+
+    transition: 0.3s;
+}
+
+button:hover {
+
+    transform: scale(1.05);
+
+    box-shadow: 0 0 20px #00f5ff;
+}
+
+/* Sections */
+
+section {
+    margin-top: 30px;
+}
+
+/* Book Cards */
+
+.book-card {
+
+    margin-top: 15px;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.1);
+
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.book-card h3 {
+    margin: 0;
+}
+
+.book-card p {
+    margin: 8px 0;
+}
+
+/* Action Buttons */
+
+.action-buttons {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+.action-buttons button {
+
+    width: auto;
+
+    padding: 10px 15px;
+}
+
+/* Dark Mode */
+
+.dark {
+    background: black;
+}
+
+.dark .container {
+    background: rgba(0,0,0,0.5);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+
+        <h1>📚 Smart Library Management System</h1>
+
+        
+    </header>
+
+    <!-- Dashboard -->
+
+    <div class="dashboard">
+
+        <div class="card">
+            <h2 id="totalBooks">0</h2>
+            <p>Total Books</p>
+        </div>
+
+        <div class="card">
+            <h2 id="issuedBooks">0</h2>
+            <p>Issued Books</p>
+        </div>
+
+        <div class="card">
+            <h2 id="availableBooks">0</h2>
+            <p>Available Books</p>
+        </div>
+
+    </div>
+
+    <!-- Add Book -->
+
+    <section>
+
+        <h2>Add New Book</h2>
+
+        <input
+        type="text"
+        id="title"
+        placeholder="Enter Book Title"
+        >
+
+        <input
+        type="text"
+        id="author"
+        placeholder="Enter Author Name"
+        >
+
+        <input
+        type="text"
+        id="category"
+        placeholder="Enter Category"
+        >
+
+        <center>
+
+            <button onclick="addBook()">
+                Add Book
+            </button>
+
+        </center>
+
+    </section>
+
+    <!-- Search -->
+
+    <section>
+
+        <h2>Search Books</h2>
+
+        <input
+        type="text"
+        id="searchInput"
+        placeholder="Search by title or author"
+        onkeyup="searchBooks()"
+        >
+
+    </section>
+
+    <!-- Book List -->
+
+    <section>
+
+        <h2>Book List</h2>
+
+        <div id="bookList"></div>
+
+    </section>
+
+</div>
+
+<script>
+
+/* Book Array */
+
+let books = [
+
+{
+    id: 1,
+    title: "The Alchemist",
+    author: "Paulo Coelho",
+    category: "Fiction",
+    issued: true,
+    student_id: "BCA101",
+    student_name: "Rahul Shetty",
+    class_name: "BCA 3rd Year"
+},
+
+{
+    id: 2,
+    title: "Atomic Habits",
+    author: "James Clear",
+    category: "Self Help",
+    issued: false,
+    student_id: "",
+    student_name: "",
+    class_name: ""
+},
+
+{
+    id: 3,
+    title: "Harry Potter",
+    author: "J.K. Rowling",
+    category: "Fantasy",
+    issued: true,
+    student_id: "BCA102",
+    student_name: "Anjali Rao",
+    class_name: "BCA 2nd Year"
+},
+
+{
+    id: 4,
+    title: "The Hobbit",
+    author: "J.R.R. Tolkien",
+    category: "Adventure",
+    issued: true,
+    student_id: "BCA103",
+    student_name: "Kiran Kumar",
+    class_name: "BCA 1st Year"
+},
+{
+    id: 5,
+    title: "Rich Dad Poor Dad",
+    author: "Robert Kiyosaki",
+    category: "Finance",
+    issued: false,
+    student_id: "",
+    student_name: "",
+    class_name: ""
+},
+
+{
+    id: 6,
+    title: "Atomic Habits",
+    author: "James Clear",
+    category: "Self Help",
+    issued: true,
+    student_id: "BCA104",
+    student_name: "Sneha Pai",
+    class_name: "BCA 3rd Year"
+},
+
+{
+    id: 7,
+    title: "Think and Grow Rich",
+    author: "Napoleon Hill",
+    category: "Motivation",
+    issued: false,
+    student_id: "",
+    student_name: "",
+    class_name: ""
+},
+
+{
+    id: 8,
+    title: "Clean Code",
+    author: "Robert C. Martin",
+    category: "Programming",
+    issued: true,
+    student_id: "BCA105",
+    student_name: "Arjun Naik",
+    class_name: "BCA Final Year"
+},
+
+{
+    id: 9,
+    title: "Python Crash Course",
+    author: "Eric Matthes",
+    category: "Programming",
+    issued: true,
+    student_id: "BCA106",
+    student_name: "Pooja Shetty",
+    class_name: "BCA 2nd Year"
+},
+
+{
+    id: 10,
+    title: "Wings of Fire",
+    author: "A.P.J Abdul Kalam",
+    category: "Biography",
+    issued: false,
+    student_id: "",
+    student_name: "",
+    class_name: ""
+},
+
+{
+    id: 11,
+    title: "Ikigai",
+    author: "Hector Garcia",
+    category: "Self Help",
+    issued: true,
+    student_id: "BCA107",
+    student_name: "Rakesh Bhat",
+    class_name: "BCA 3rd Year"
+},
+
+{
+    id: 12,
+    title: "Deep Work",
+    author: "Cal Newport",
+    category: "Productivity",
+    issued: false,
+    student_id: "",
+    student_name: "",
+    class_name: ""
+},
+
+{
+    id: 13,
+    title: "1984",
+    author: "George Orwell",
+    category: "Dystopian",
+    issued: true,
+    student_id: "BCA108",
+    student_name: "Megha Rao",
+    class_name: "BCA Final Year"
+}
+
+];
+
+/* Dashboard */
+
+function updateDashboard() {
+
+    document.getElementById("totalBooks").innerText =
+    books.length;
+
+    const issuedBooks =
+    books.filter(book => book.issued).length;
+
+    document.getElementById("issuedBooks").innerText =
+    issuedBooks;
+
+    document.getElementById("availableBooks").innerText =
+    books.length - issuedBooks;
+}
+
+/* Add Book */
+
+function addBook() {
+
+    const title =
+    document.getElementById("title").value;
+
+    const author =
+    document.getElementById("author").value;
+
+    const category =
+    document.getElementById("category").value;
+
+    if(
+        title === "" ||
+        author === "" ||
+        category === ""
+    ) {
+
+        alert("Please fill all fields");
+
+        return;
+    }
+
+    const book = {
+
+        id: Date.now(),
+
+        title: title,
+
+        author: author,
+
+        category: category,
+
+        issued: false,
+
+        student_id: "",
+
+        student_name: "",
+
+        class_name: ""
+    };
+
+    books.push(book);
+
+    updateDashboard();
+
+    displayBooks();
+
+    document.getElementById("title").value = "";
+
+    document.getElementById("author").value = "";
+
+    document.getElementById("category").value = "";
+}
+
+/* Display Books */
+
+function displayBooks(filteredBooks = books) {
+
+    const bookList =
+    document.getElementById("bookList");
+
+    bookList.innerHTML = "";
+
+    if(filteredBooks.length === 0) {
+
+        bookList.innerHTML =
+        "<p>No books available</p>";
+
+        return;
+    }
+
+    filteredBooks.forEach(book => {
+
+        const div =
+        document.createElement("div");
+
+        div.classList.add("book-card");
+
+        div.innerHTML = `
+
+        <h3>${book.title}</h3>
+
+        <p>
+        <b>Author:</b>
+        ${book.author}
+        </p>
+
+        <p>
+        <b>Category:</b>
+        ${book.category}
+        </p>
+
+        <p>
+        <b>Status:</b>
+        ${book.issued ? "Issued" : "Available"}
+        </p>
+
+        <p>
+        <b>Student ID:</b>
+        ${book.student_id || "Not Issued"}
+        </p>
+
+        <p>
+        <b>Student Name:</b>
+        ${book.student_name || "Not Issued"}
+        </p>
+
+        <p>
+        <b>Class:</b>
+        ${book.class_name || "Not Issued"}
+        </p>
+
+        <div class="action-buttons">
+
+            <button onclick="issueBook(${book.id})">
+
+            ${book.issued
+            ? "Return Book"
+            : "Issue Book"}
+
+            </button>
+
+            <button onclick="deleteBook(${book.id})">
+
+            Delete
+
+            </button>
+
+        </div>
+        `;
+
+        bookList.appendChild(div);
+    });
+}
+
+/* Issue or Return Book */
+
+function issueBook(id) {
+
+    books = books.map(book => {
+
+        if(book.id === id) {
+
+            if(book.issued) {
+
+                book.issued = false;
+
+                book.student_id = "";
+
+                book.student_name = "";
+
+                book.class_name = "";
+
+            } else {
+
+                const studentId =
+                prompt("Enter Student ID");
+
+                const studentName =
+                prompt("Enter Student Name");
+
+                const className =
+                prompt("Enter Class Name");
+
+                if(
+                    studentId &&
+                    studentName &&
+                    className
+                ) {
+
+                    book.issued = true;
+
+                    book.student_id = studentId;
+
+                    book.student_name = studentName;
+
+                    book.class_name = className;
+                }
+            }
+        }
+
+        return book;
+    });
+
+    updateDashboard();
+
+    displayBooks();
+}
+
+/* Delete Book */
+
+function deleteBook(id) {
+
+    books =
+    books.filter(book => book.id !== id);
+
+    updateDashboard();
+
+    displayBooks();
+}
+
+/* Search Books */
+
+function searchBooks() {
+
+    const searchValue =
+    document.getElementById("searchInput")
+    .value
+    .toLowerCase();
+
+    const filteredBooks =
+    books.filter(book =>
+
+        book.title
+        .toLowerCase()
+        .includes(searchValue)
+
+        ||
+
+        book.author
+        .toLowerCase()
+        .includes(searchValue)
+    );
+
+    displayBooks(filteredBooks);
+}
+
+/* Dark Mode */
+
+function toggleDarkMode() {
+
+    document.body
+    .classList.toggle("dark");
+}
+
+/* Initial Load */
+
+updateDashboard();
+
+displayBooks();
+
+</script>
+
+</body>
+
+</html>

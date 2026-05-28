@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login | Library Mangement System</title>
+<div class="container">
+    
+
+        <h1> Welcome to Library System 📚</h1>
+        <p>Explore thousands of books, manage your reading journey, and grow your knowledge.</p>
+    </div>
+
+<style>
+
+    
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    
+    background-image: url('https://www.biblionix.com/wp-content/uploads/2023/11/Library-ManagementSystem.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+
+/* LOGIN CARD */
+.login-card{
+    width:420px;
+    padding:30px;
+    border-radius:10px;
+    background:rgba(5, 115, 159, 0.438);
+    text-align:center;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+
+
+}
+
+
+
+
+h1{
+    margin-bottom:10px;
+    color:hwb(0 93% 4%);
+}
+
+p{
+    margin-bottom:15px;
+    color:hsl(0, 8%, 97%);
+}
+
+/* Inputs */
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:5px;
+    border:1px solid #ccc;
+    outline:none;
+}
+
+/* Button */
+button{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border:none;
+    border-radius:5px;
+    background:hsla(244, 76%, 66%, 0.758);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#5a67d8;
+}
+
+.signup a{
+    color:#667eea;
+    text-decoration:none;
+}
+
+#msg{
+    margin-top:10px;
+    font-weight:bold;
+}
+</style>
+
+</head>
+
+<body>
+<div class="right-panel">
+<div class="login-card">
+    <h1>Library Mangement System</h1>
+    <p>Login to continue</p>
+
+    <input type="text" id="Email-id" placeholder="Email-id">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+    <p class="Register">
+        New user? <a href="C:\Users\Google\Documents\Library Mangement System\Register.html">Create Account</a>
+    </p>
+
+    <p id="msg"></p>
+</div>
+
+<script>
+function login(){
+    const user=document.getElementById("Email-id").value;
+    const pass=document.getElementById("password").value;
+    const msg=document.getElementById("msg");
+
+    const users=JSON.parse(localStorage.getItem("users"))||[];
+
+    const validUser=users.find(
+        u=>u.username===user && u.password===pass
+    );
+
+    if(validUser){
+        msg.style.color="green";
+        msg.innerText="Login Successful";
+
+        setTimeout(()=>{
+            window.location.href="main.html";
+        },1000);
+
+        
+    }else{
+        msg.style.color="red";
+        msg.innerText="Invalid username or password";
+    }
+}
+</script>
+
+</body>
+
+</html>
